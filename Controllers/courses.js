@@ -28,13 +28,11 @@ export const getCourses = async (req, res) => {
       .json({ messsage: "Done get courses successfully", courses });
   } catch (error) {
     console.log(error.message);
-    res
-      .status(400)
-      .json({
-        message: "Error get courses controller",
-        error: error,
-        error: error.message,
-      });
+    res.status(400).json({
+      message: "Error get courses controller",
+      errorr: { error },
+      error: error.message,
+    });
   }
 };
 export const getCourse = async (req, res, next) => {
