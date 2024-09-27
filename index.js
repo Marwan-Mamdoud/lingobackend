@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.get("/api/unit/hi", (req, res) => {
   return res.json({ message: "hi" });
 });
-app.get("/api/unit/hi", (req, res) => {
+app.get("/api/unit", (req, res) => {
   return res.status(200).json({ message: "hi" });
 });
 app.use(TestRouter);
