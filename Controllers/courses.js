@@ -21,9 +21,9 @@ export const CreateCourse = async (req, res, next) => {
 
 export const getCourses = async (req, res) => {
   try {
-    const courses = await Courses.find().lean();
+    const courses = await Courses.find();
     if (!courses) throw new Error("Cant find courses");
-    res
+    return res
       .status(200)
       .json({ messsage: "Done get courses successfully", courses });
   } catch (error) {
@@ -39,7 +39,9 @@ export const getCourse = async (req, res, next) => {
   try {
     const course = await Courses.findById(req.params.id);
     if (!course) throw new Error("Cant find courses");
-    res.status(200).json({ messsage: "Done get courses successfully", course });
+    return res
+      .status(200)
+      .json({ messsage: "Done get courses successfully", course });
   } catch (error) {
     console.log(error.message);
     res
