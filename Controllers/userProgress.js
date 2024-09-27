@@ -32,7 +32,7 @@ export const createUserProgress = async (req, res, next) => {
 
 export const gettest = async (req, res, next) => {
   try {
-    return res.status(200).json({ message: "Doneeeee" });
+    res.status(200).json({ message: "Doneeeee" });
   } catch (error) {
     console.log(error);
   }
@@ -44,7 +44,10 @@ export const getUsersProgress = async (req, res, next) => {
     if (!usersProgress) throw new Error("Cant get users progress");
     return res
       .status(200)
-      .json({ message: "Done get users progress", usersProgress });
+      .json({
+        message: "Done get users progress",
+        usersProgees: usersProgress || null,
+      });
   } catch (error) {
     console.log(error.message);
     return res
