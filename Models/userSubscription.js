@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = new mongoose.Schema({
+const Schema = mongoose.Schema({
   userId: { type: String },
   stripeCustomerId: { type: String },
   stripeSubscriptionId: { type: String },

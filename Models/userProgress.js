@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = new mongoose.Schema({
+const Schema = mongoose.Schema({
   userId: { type: String },
   userName: { type: String },
   userImage: { type: String },
