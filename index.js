@@ -26,6 +26,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.get("/api/unit/hi", (req, res) => {
+  return res.json({ message: "hi" });
+});
+app.get("/api/unit/hi", (req, res) => {
+  return res.status(200).json({ message: "hi" });
+});
 app.use(TestRouter);
 app.use(UnitsRouter);
 app.use(LessonRouter);
