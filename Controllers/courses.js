@@ -21,8 +21,8 @@ export const CreateCourse = async (req, res, next) => {
 
 export const getCourses = async (req, res, next) => {
   try {
-    const courses = await Courses.find();
-    // if (!courses) throw new Error("Cant find courses");
+    // const courses = await Courses.find();
+    if (!courses) throw new Error("Cant find courses");
     res
       .status(200)
       .json({ messsage: "Done get courses successfully", courses });
