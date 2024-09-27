@@ -30,6 +30,14 @@ export const createUserProgress = async (req, res, next) => {
   }
 };
 
+export const gettest = async (req, res, next) => {
+  try {
+    return res.status(200).json({ message: "Doneeeee" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getUsersProgress = async (req, res, next) => {
   try {
     const usersProgress = await UserProgress.find().sort({ points: -1 });

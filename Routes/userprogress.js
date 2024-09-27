@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createUserProgress,
+  gettest,
   getUserProgressById,
   getUsersProgress,
   updateUserProgress,
@@ -20,6 +21,8 @@ const router = Router();
 router.get("/get-userProgress/:userId", getUserProgressById);
 
 router.get("/get-unit-progress/:UnitId", getUnitCourse);
+
+router.get("/get-test", gettest);
 
 router.get("/get-users-progress", getUsersProgress);
 
