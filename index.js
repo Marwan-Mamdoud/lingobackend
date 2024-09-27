@@ -42,7 +42,8 @@ const getConnectToDatabase = async () => {
   try {
     await mongoose
       .connect(
-        "mongodb+srv://maro:VBP1ACAwuEgEySEj@cluster0.3rhla.mongodb.net/Duolingo"
+        "mongodb+srv://maro:VBP1ACAwuEgEySEj@cluster0.3rhla.mongodb.net/Duolingo",
+        { useNewUrlParser: true, useUnifiedTopology: true }
       )
       // mongodb+srv://maro:VBP1ACAwuEgEySEj@cluster0.3rhla.mongodb.net/
       .then((data) => {
