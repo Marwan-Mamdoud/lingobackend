@@ -40,8 +40,8 @@ export const gettest = async (req, res, next) => {
 
 export const getUsersProgress = async (req, res, next) => {
   try {
-    // const usersProgress = await UserProgress.find().sort({ points: -1 });
-    // if (!usersProgress) throw new Error("Cant get users progress");
+    const usersProgress = await UserProgress.find().sort({ points: -1 });
+    if (!usersProgress) throw new Error("Cant get users progress");
     return res.status(200).json({
       message: "Done get users progress",
       // usersProgees: usersProgress || null,
