@@ -7,7 +7,7 @@ export const CreateCourse = async (req, res, next) => {
     if (!image) throw new Error("Image is required");
     const course = await new Courses({ title, image });
     if (course) await course.save();
-    res
+    return res
       .status(201)
       .json({ message: "Done create course successfully", course });
   } catch (error) {

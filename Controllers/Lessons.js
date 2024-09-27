@@ -17,7 +17,7 @@ export const createLesson = async (req, res, next) => {
     const unit = await Units.findById(unitId);
     unit.lessons.push(lesson._id);
     await unit.save();
-    res
+    return res
       .status(201)
       .json({ message: "Done create lesson successfully.", lesson });
   } catch (error) {
@@ -43,7 +43,7 @@ export const getUnitLessonswithStatus = async (req, res, next) => {
       lesson.completed = completed;
       return lesson;
     });
-    res.status(200).json({ message: "Done get unit lessons", lessonss });
+    return res.status(200).json({ message: "Done get unit lessons", lessonss });
   } catch (error) {
     console.log(error.message);
     res
@@ -62,7 +62,7 @@ export const getLesson = async (req, res, next) => {
 
     lesson.completed = completed ? true : false;
     await lesson.save();
-    res.status(200).json({ message: "done get lesson", lesson });
+    return res.status(200).json({ message: "done get lesson", lesson });
   } catch (error) {
     console.log(error.message);
     res
@@ -82,7 +82,9 @@ export const createChallenge = async (req, res, next) => {
     const lesson = await Lessons.findById(lessonId);
     lesson.challenges.push(challenge._id);
     await lesson.save();
-    res.status(201).json({ message: "Done create challenge", challenge });
+    return res
+      .status(201)
+      .json({ message: "Done create challenge", challenge });
   } catch (error) {
     console.log(error.message);
     res
@@ -102,7 +104,7 @@ export const getChallenges = async (req, res, next) => {
         challenge.ChallengeProgress && challenge.ChallengeProgress.completed;
       return { completed, ...challenge._doc };
     });
-    res.status(200).json(challenges);
+    return res.status(200).json(challenges);
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: `Error get challenges: ${error.message}` });
@@ -128,7 +130,9 @@ export const updatae = async (req, res, next) => {
     };
     challenge.completed = true;
     await challenge.save();
-    res.status(200).json({ message: "Done Update challenge", challenge });
+    return res
+      .status(200)
+      .json({ message: "Done Update challenge", challenge });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: `Error create option : ${error.message}` });
@@ -139,7 +143,7 @@ export const getChallenge = async (req, res, next) => {
   try {
     const challenge = await Challenges.findById(req.params.id);
     if (!challenge) throw new Error("Cant get challenge");
-    res.status(200).json({ message: "Done Get challenge", challenge });
+    return res.status(200).json({ message: "Done Get challenge", challenge });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: `Error get challenge: ${error.message}` });
@@ -163,7 +167,9 @@ export const createOption = async (req, res, next) => {
     const challenge = await Challenges.findById(challengeId);
     challenge.challengeOptions.push(option);
     await challenge.save();
-    res.status(201).json({ message: "Done create challenge option ", option });
+    return res
+      .status(201)
+      .json({ message: "Done create challenge option ", option });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: `Error create option : ${error.message}` });
@@ -180,7 +186,7 @@ export const getCahllengeProgress = async (req, res, next) => {
     });
     if (!challengeProgress || challengeProgress.length === 0)
       throw new Error("Cant get challenge progress");
-    res
+    return res
       .status(200)
       .json({ message: "Done get challenge progress", challengeProgress });
   } catch (error) {
@@ -206,7 +212,7 @@ export const createChallengeProgress = async (req, res, next) => {
     challenge.ChallengeProgress = challengeProgress;
     challenge.completed = true;
     await challenge.save();
-    res
+    return res
       .status(201)
       .json({ message: "Done create challenge progress", challengeProgress });
   } catch (error) {
@@ -226,7 +232,7 @@ export const updateChallengeProgress = async (req, res, next) => {
     if (!challengeProgress)
       throw new Error("Cant find challenge progress and update it");
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Done get challenge progress and update it.",
       challengeProgress,
     });

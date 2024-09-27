@@ -24,14 +24,14 @@ export const getUnitCourse = async (req, res, next) => {
     });
     const firstUncompletedLesson = lessonss.find((lesson) => !lesson.completed);
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Done get course progress",
       activeLessonId: firstUncompletedLesson._id,
       activeLesson: firstUncompletedLesson,
     });
   } catch (error) {
     console.log(error.message);
-    res.status(400).json({
+    return res.status(400).json({
       error: `Error get course progress controller : ${error.message}`,
     });
   }
@@ -94,7 +94,7 @@ export const upsertChallengeProgress = async (req, res, next) => {
       points: userProgress.points + 10,
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Done upsert challenge progress",
       challengeProgress,
       userProgress,
@@ -138,7 +138,7 @@ export const reduceHearts = async (req, res, next) => {
       hearts: Math.max(userProgress.hearts - 1, 0),
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Done reduce heart",
       challengeProgress,
       userProgress,
@@ -146,6 +146,8 @@ export const reduceHearts = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error.message);
-    res.status(400).json({ error: `Error reduce heart: ${error.message} ` });
+    return res
+      .status(400)
+      .json({ error: `Error reduce heart: ${error.message} ` });
   }
 };

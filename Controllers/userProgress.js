@@ -18,7 +18,7 @@ export const createUserProgress = async (req, res, next) => {
 
     const Userprogress = await userProgress.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Done create userProgress Successfully",
       userProgress: Userprogress,
     });
@@ -32,7 +32,7 @@ export const createUserProgress = async (req, res, next) => {
 
 export const gettest = async (req, res, next) => {
   try {
-    res.status(200).json({ message: "Doneeeee" });
+    return res.status(200).json({ message: "Doneeeee" });
   } catch (error) {
     console.log(error);
   }
@@ -40,11 +40,11 @@ export const gettest = async (req, res, next) => {
 
 export const getUsersProgress = async (req, res, next) => {
   try {
-    // const usersProgress = await UserProgress.find().sort({ points: -1 });
-    // if (!usersProgress) throw new Error("Cant get users progress");
+    const usersProgress = await UserProgress.find().sort({ points: -1 });
+    if (!usersProgress) throw new Error("Cant get users progress");
     return res.status(200).json({
       message: "Done get users progress",
-      // usersProgees: usersProgress || null,
+      usersProgees: usersProgress,
     });
   } catch (error) {
     console.log(error.message);
@@ -64,7 +64,9 @@ export const getUserProgressById = async (req, res, next) => {
     if (!userProgress) {
       userProgress = null;
     }
-    res.status(200).json({ message: "Done get userProgress", userProgress });
+    return res
+      .status(200)
+      .json({ message: "Done get userProgress", userProgress });
   } catch (error) {
     console.log(error.message);
     res
@@ -91,7 +93,7 @@ export const updateUserProgress = async (req, res, next) => {
 
     await userProgress.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Done update userProgress",
       userProgress: userProgress,
     });

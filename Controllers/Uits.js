@@ -9,7 +9,7 @@ export const createUnit = async (req, res, next) => {
     const course = await Courses.findById(courseId);
     course.units.push(unit._id);
     await course.save();
-    res.status(201).json({ message: "Done create unit", unit });
+    return res.status(201).json({ message: "Done create unit", unit });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });
@@ -20,7 +20,7 @@ export const getUnits = async (req, res, next) => {
   try {
     const units = await Units.find({ courseId: req.params.id });
     if (!units) throw new Error("Cant get units");
-    res.status(200).json({ message: "Done get units", units });
+    return res.status(200).json({ message: "Done get units", units });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: `Error get units: ${error.message}` });

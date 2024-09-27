@@ -11,7 +11,7 @@ export const getUserSubscription = async (req, res, next) => {
         Date.now();
     if (!usersubscription)
       return res.status(200).json({ userSubscription: null });
-    res.status(200).json({
+    return res.status(200).json({
       message: "Done get userSubscription",
       userSubscription: { active: !!active, ...usersubscription._doc },
     });
@@ -34,7 +34,7 @@ export const createUserSubscription = async (req, res, next) => {
     });
     if (!userSubscription) throw new Error("Cant create subscription");
     await userSubscription.save();
-    res
+    return res
       .status(201)
       .json({ message: "Done create subscription", userSubscription });
   } catch (error) {
