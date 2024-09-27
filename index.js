@@ -4,13 +4,14 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import cors from "cors";
 const PORT = 5000;
-const app = express();
 
 import TestRouter from "./Routes/test.js";
 import CourseRouter from "./Routes/courses.js";
 import UnitsRouter from "./Routes/unit.js";
 import LessonRouter from "./Routes/lessons.js";
 import UserProgressRouter from "./Routes/userprogress.js";
+
+const app = express();
 
 app.use(
   cors({
@@ -21,6 +22,35 @@ app.use(
     credentials: true,
   })
 );
+
+app.listen(PORT, () => {
+  console.log("Done Connect Server");
+  // getConnectToDatabase();
+});
+
+mongoose
+  .connect(
+    "mongodb+srv://maro:VBP1ACAwuEgEySEj@cluster0.3rhla.mongodb.net/Duolingo"
+  )
+  .then(() => console.log("Database is connected✌️"))
+  .catch((error) => console.log(error));
+
+// const getConnectToDatabase = async () => {
+//   try {
+//     await mongoose
+//       .connect(
+//         "mongodb+srv://maro:VBP1ACAwuEgEySEj@cluster0.3rhla.mongodb.net/Duolingo",
+//         { useNewUrlParser: true, useUnifiedTopology: true }
+//       )
+//       // mongodb+srv://maro:VBP1ACAwuEgEySEj@cluster0.3rhla.mongodb.net/
+//       .then((data) => {
+//         if (data) console.log("Done Connect To Database");
+//       });
+//   } catch (error) {
+//     console.error(`Error From Connect To Data: ` + error.message);
+//     process.exit(1);
+//   }
+// };
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -37,25 +67,3 @@ app.use(UnitsRouter);
 app.use(LessonRouter);
 app.use("/api/courses", CourseRouter);
 app.use("/api/userProgress", UserProgressRouter);
-
-const getConnectToDatabase = async () => {
-  try {
-    await mongoose
-      .connect(
-        "mongodb+srv://maro:VBP1ACAwuEgEySEj@cluster0.3rhla.mongodb.net/Duolingo",
-        { useNewUrlParser: true, useUnifiedTopology: true }
-      )
-      // mongodb+srv://maro:VBP1ACAwuEgEySEj@cluster0.3rhla.mongodb.net/
-      .then((data) => {
-        if (data) console.log("Done Connect To Database");
-      });
-  } catch (error) {
-    console.error(`Error From Connect To Data: ` + error.message);
-    process.exit(1);
-  }
-};
-
-app.listen(PORT, () => {
-  console.log("Done Connect Server");
-  getConnectToDatabase();
-});
