@@ -21,7 +21,7 @@ export const CreateCourse = async (req, res, next) => {
 
 export const getCourses = async (req, res) => {
   try {
-    const courses = await Courses.find().lean();
+    // const courses = await Courses.find().lean();
     if (!courses) throw new Error("Cant find courses");
     res
       .status(200)
@@ -30,7 +30,11 @@ export const getCourses = async (req, res) => {
     console.log(error.message);
     res
       .status(400)
-      .json({ message: "Error get courses controller", error: error.message });
+      .json({
+        message: "Error get courses controller",
+        error: error,
+        error: error.message,
+      });
   }
 };
 export const getCourse = async (req, res, next) => {
